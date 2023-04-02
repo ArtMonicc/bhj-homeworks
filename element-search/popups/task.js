@@ -1,16 +1,26 @@
 const modalMain = document.querySelector("#modal_main");
 const modalSuccess = document.querySelector("#modal_success");
-const successButton = document.querySelector(".show-success");
-const closeButtons = document.querySelectorAll(".modal__close");
+const closeEl = Array.from(document.querySelectorAll(".modal__close_times"));
+const btn = document.querySelectorAll(".btn");
 
-modalMain.classList.add("modal_active");
+modalMain.style.display = "flex";
 
-Array.from(closeButtons).forEach(
-  (btn) =>
-    (btn.onclick = () => btn.closest(".modal").classList.remove("modal_active"))
-);
+btn.forEach((el) => (el.onclick = changeModal));
+closeEl.forEach((el) => (el.onclick = closeModal));
 
-successButton.onclick = () => {
-  modalMain.classList.remove("modal_active");
-  modalSuccess.classList.add("modal_active");
-};
+function changeModal() {
+  if (modalMain.style.display === "flex") {
+    modalMain.style.display = "none";
+    modalSuccess.style.display = "flex";
+  } else {
+    modalSuccess.style.display = "none";
+    modalMain.style.display = "flex";
+  }
+}
+function closeModal() {
+  if (modalMain.style.display === "flex") {
+    modalMain.style.display = "none";
+  } else {
+    modalSuccess.style.display = "none";
+  }
+}
