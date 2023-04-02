@@ -1,26 +1,24 @@
-const modalMain = document.querySelector("#modal_main");
-const modalSuccess = document.querySelector("#modal_success");
-const closeEl = Array.from(document.querySelectorAll(".modal__close_times"));
-const btn = document.querySelectorAll(".btn");
+const arrowPrev = document.querySelector(".slider__arrow_prev");
+const arrowNext = document.querySelector(".slider__arrow_next");
+const items = Array.from(document.querySelectorAll(".slider__item"));
+const sliderDots = Array.from(document.querySelectorAll(".slider__dot"));
 
-modalMain.style.display = "flex";
+let index = items.findIndex((item) =>
+  item.classList.contains("slider__item_active")
+);
+let i = index;
 
-btn.forEach((el) => (el.onclick = changeModal));
-closeEl.forEach((el) => (el.onclick = closeModal));
+initialLaunch(i);
+arrowNext.onclick = function () {
+  i = items.findIndex((item) => item.classList.contains("slider__item_active"));
+  removeIndex(i);
+  i < items.length - 1 ? i++ : (i = 0);
+  addingActive(i);
+};
 
-function changeModal() {
-  if (modalMain.style.display === "flex") {
-    modalMain.style.display = "none";
-    modalSuccess.style.display = "flex";
-  } else {
-    modalSuccess.style.display = "none";
-    modalMain.style.display = "flex";
-  }
-}
-function closeModal() {
-  if (modalMain.style.display === "flex") {
-    modalMain.style.display = "none";
-  } else {
-    modalSuccess.style.display = "none";
-  }
-}
+arrowPrev.onclick = function () {
+  i = items.findIndex((item) => item.classList.contains("slider__item_active"));
+  removeIndex(i);
+  i >= 1 ? i-- : (i = items.length - 1);
+  addingActive(i);
+};
