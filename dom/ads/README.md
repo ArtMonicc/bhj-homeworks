@@ -2,9 +2,9 @@
 
 Домашнее задание к занятию 2.1 «DOM».
 
-## Описание 
+## Описание
 
-Необходимо реализовать механизм смены текстовых объявлений. 
+Необходимо реализовать механизм смены текстовых объявлений.
 Каждое объявление меняется через 1 секунду.
 
 ![Demo](./demo.gif)
@@ -31,7 +31,7 @@
 ```
 
 Для того, чтобы задать текстовый элемент активным, установите у него класс
-*rotator__case_active*:
+_rotator\_\_case_active_:
 
 ```html
 <span class="rotator__case rotator__case_active">Бог JS</span>
@@ -41,14 +41,14 @@
 
 1. Каждую секунду меняйте класс с одного элемента на другой
 2. Сделайте акцент на том, чтобы на странице можно было использовать несколько
-ротаторов одновременно
+   ротаторов одновременно
 3. Смена текстовых блоков должна быть бесконечной.
 
 _Подумайте, как из setInterval сделать бесконечный цикл_
-  
+
 ### Повышенный уровень сложности (не обязательно)
 
-Добавьте через *data-атрибуты* тегов опции:
+Добавьте через _data-атрибуты_ тегов опции:
 
 1. Цвет текста
 2. Скорость смены слайдов
@@ -61,17 +61,33 @@ _Подумайте, как из setInterval сделать бесконечны
 <p>
   Я
   <span class="rotator">
-    <span class="rotator__case rotator__case_active" data-speed="1000" data-color="red">Бог JS</span>
-    <span class="rotator__case" data-speed="2000" data-color="green">Лучший программист на земле</span>
-    <span class="rotator__case" data-speed="1000" data-color="#000">покорю этот мир</span>
-    <span class="rotator__case" data-speed="1000" data-color="red">учусь в Нетологии</span>
-    <span class="rotator__case" data-speed="500" data-color="blue">счастливый как никто</span>
-    <span class="rotator__case" data-speed="200" data-color="gray">радуюсь жизни</span>
+    <span
+      class="rotator__case rotator__case_active"
+      data-speed="1000"
+      data-color="red"
+      >Бог JS</span
+    >
+    <span class="rotator__case" data-speed="2000" data-color="green"
+      >Лучший программист на земле</span
+    >
+    <span class="rotator__case" data-speed="1000" data-color="#000"
+      >покорю этот мир</span
+    >
+    <span class="rotator__case" data-speed="1000" data-color="red"
+      >учусь в Нетологии</span
+    >
+    <span class="rotator__case" data-speed="500" data-color="blue"
+      >счастливый как никто</span
+    >
+    <span class="rotator__case" data-speed="200" data-color="gray"
+      >радуюсь жизни</span
+    >
   </span>
 </p>
 ```
 
 ## Решение задач
+
 1. Перейти в папку задания. `cd ./dom/ads`.
 2. Открыть файл `task.js` в вашем редакторе кода и выполнить задание.
 3. Открыть файл `task.html` в вашем браузере и убедиться в правильности выводимых результатов.
@@ -88,7 +104,7 @@ _Подумайте, как из setInterval сделать бесконечны
 [5]: https://github.com/netology-code/guides/blob/master/git/REAMDE.md
 [6]: https://netology.ru/
 
-*Никаких файлов прикреплять не нужно.*
+_Никаких файлов прикреплять не нужно._
 
 Все задачи обязательны к выполнению для получения зачета. Присылать на проверку можно каждую задачу по отдельности или все задачи вместе. Во время проверки по частям ваша домашняя работа будет со статусом "На доработке".
 
