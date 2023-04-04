@@ -2,7 +2,6 @@ const products = document.querySelector(".products");
 const cart = document.querySelector(".cart");
 const cartProducts = cart.querySelector(".cart__products");
 let productInfo = JSON.parse(localStorage.getItem("productInfo")) || [];
-
 products.addEventListener("click", (event) => {
   let target = event.target;
   if (target.classList.contains("product__quantity-control_inc")) {
