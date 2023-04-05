@@ -1,65 +1,61 @@
-const tasksMain = document.getElementById("tasks");
-const tasksForm = document.querySelector(".tasks__control");
-const btn = tasksMain.querySelector("button");
-const taskInput = tasksMain.querySelector(".tasks__input");
-const tasksList = tasksMain.querySelector(".tasks__list");
-let tasksArray = JSON.parse(localStorage.getItem("tasks")) || [];
-let removerIndex = null;
+const hasTooltips = Array.from(document.querySelectorAll(".has-tooltip"));
+hasTooltips.forEach((el) =>
+  el.insertAdjacentHTML("afterend", '<div class="tooltip"></div>')
+);
 
-tasksForm.addEventListener("click", (event) => {
-  if (event.target === btn) {
+document.addEventListener("click", (event) => {
+  let target = event.target;
+  if (target.classList.contains("has-tooltip")) {
     event.preventDefault();
-    addTask();
-  }
-});
-taskInput.addEventListener("input", () => {
-  if (taskInput.value === " ") {
-    taskInput.value = "";
+    const tooltip = target.nextElementSibling;
+    tooltipContent(target, tooltip);
+    changePositionAttribute(tooltip, "bottom");
+    if (tooltip.classList.contains("tooltip_active")) {
+      tooltip.classList.remove("tooltip_active");
+    } else {
+      hideTooltips();
+      tooltip.classList.add("tooltip_active");
+      tooltipPositioning(tooltip, tooltip.dataset.position, target);
+    }
+  } else {
+    hideTooltips();
   }
 });
 
-if (tasksList) {
-  tasksList.addEventListener("click", (event) => {
-    let removers = tasksList.querySelectorAll(".task__remove");
-    for (let i = 0; i < removers.length; i++) {
-      if (event.target === removers[i]) {
-        event.preventDefault();
-        removerIndex = i;
-        removeTask(event.target);
-      }
-    }
+function tooltipPositioning(element, position, event) {
+  let {
+    top: linkTop,
+    left: linkLeft,
+    height: linkHeight,
+    width: linkWidth,
+  } = event.getBoundingClientRect();
+  let { height: tooltipHeight, width: tooltipWidth } =
+    element.getBoundingClientRect();
+  element.style.position = "absolute";
+  if (position === "top") {
+    element.style.top = linkTop + window.scrollY - tooltipHeight + "px";
+    element.style.left = linkLeft + "px";
+  } else if (position === "left") {
+    element.style.top = linkTop + window.scrollY + "px";
+    element.style.left = linkLeft - tooltipWidth + "px";
+  } else if (position === "right") {
+    element.style.top = linkTop + window.scrollY + "px";
+    element.style.left = linkLeft + linkWidth + "px";
+  } else if (position === "bottom") {
+    element.style.top = linkTop + window.scrollY + linkHeight + "px";
+    element.style.left = linkLeft + "px";
+  }
+}
+function hideTooltips() {
+  const currentTips = document.querySelectorAll(".tooltip_active");
+  currentTips.forEach((el) => {
+    el.classList.remove("tooltip_active");
   });
 }
-function addTask() {
-  if (taskInput.value) {
-    let text = taskInput.value;
-    tasksArray.push(text);
-    taskInput.value = "";
-    localStorage.setItem("tasks", JSON.stringify(tasksArray));
-    displayTasks(tasksArray, tasksList);
-    console.log(tasksArray);
-  }
+function tooltipContent(event, element) {
+  element.setAttribute("data-position", "");
+  element.textContent = event.getAttribute("title");
 }
-
-function displayTasks(obj, list) {
-  list.innerHTML = obj
-    .map((item) => {
-      return `<div class="task">
-            <div class="task__title">
-                ${item}
-            </div>
-            <a href="#" class="task__remove">&times;</a>
-        </div>`;
-    })
-    .join("");
+function changePositionAttribute(element, position) {
+  element.dataset.position = position;
 }
-
-function removeTask(el) {
-  let task = el.closest(".task");
-  tasksArray.splice(removerIndex, 1);
-  localStorage.setItem("tasks", JSON.stringify(tasksArray));
-  task.remove();
-  console.log(tasksArray);
-}
-
-displayTasks(tasksArray, tasksList);
